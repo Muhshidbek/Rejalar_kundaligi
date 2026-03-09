@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#f4f5f7">
+    <title>Kunlik Reja</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/icon.svg">
+    <!-- Google Fonts for typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Chart.js for Dashboard -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1 id="greeting-display">Xayrli Kun ☀️</h1>
+            <p id="date-display"></p>
+        </header>
+
+        <!-- Stories Container (Quick-add Goals) -->
+        <div class="stories-container" id="stories-container">
+            <!-- JS injects stories here -->
+        </div>
+
+        <div class="tabs-container">
+            <button class="tab-btn active" data-tab="main">Asosiy Rejalar</button>
+            <button class="tab-btn" data-tab="stats">Statistika</button>
+        </div>
+
+        <div id="main-view">
+            <div class="dashboard">
+                <div class="chart-container">
+                    <canvas id="progressChart"></canvas>
+                    <div class="chart-center" id="progress-percent">0%</div>
+                </div>
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <span class="stat-label">Barchasi</span>
+                        <span class="stat-value" id="total-tasks">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">To'liq</span>
+                        <span class="stat-value success" id="completed-tasks">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Chala</span>
+                        <span class="stat-value warning" id="partial-tasks" style="color:#f59e0b;">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Qoldi</span>
+                        <span class="stat-value danger" id="pending-tasks">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-section">
+                <input type="text" id="task-input" placeholder="Yangi reja qo'shish..." autocomplete="off">
+
+                <div class="task-type-selector">
+                    <label>
+                        <input type="radio" name="task-type" value="daily" checked> Har kungi
+                    </label>
+                    <label>
+                        <input type="radio" name="task-type" value="today"> Faqat bugun
+                    </label>
+                </div>
+
+                <button id="add-btn" aria-label="Qo'shish">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="tasks-container">
+                <ul id="task-list">
+                    <!-- Tasks will be injected here via JS -->
+                </ul>
+            </div>
+        </div>
+
+        <div id="stats-view" class="hidden">
+            <div class="stats-controls">
+                <div class="custom-select" id="stats-filter-custom">
+                    <div class="select-selected">Oxirgi 7 kun</div>
+                    <div class="select-items select-hide">
+                        <div data-value="week">Oxirgi 7 kun</div>
+                        <div data-value="month">Oxirgi 30 kun</div>
+                        <div data-value="all">Barcha vaqt</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container-large">
+                <canvas id="historyChart"></canvas>
+            </div>
+
+            <div class="stats-summary dashboard">
+                <div class="stat-box" style="flex:1">
+                    <span class="stat-label">Joriy Seriya</span>
+                    <span class="stat-value warning" id="current-streak">0 🔥</span>
+                </div>
+                <div class="stat-box" style="flex:1">
+                    <span class="stat-label">Jami Bajarilgan</span>
+                    <span class="stat-value success" id="history-completed">0</span>
+                </div>
+                <div class="stat-box" style="flex:1">
+                    <span class="stat-label">Samaradorlik</span>
+                    <span class="stat-value" id="history-percent">0%</span>
+                </div>
+            </div>
+
+            <div class="tracker-container dashboard">
+                <h3 class="tracker-title">Doimiy Odatlar Trekeri (Shu oy)</h3>
+                <div class="tracker-legend">
+                    <div class="legend-item"><span class="dot success"></span> To'liq</div>
+                    <div class="legend-item"><span class="dot warning"></span> Chala</div>
+                    <div class="legend-item"><span class="dot danger"></span> Qilinmadi</div>
+                </div>
+                <div class="habit-grid-wrapper">
+                    <div id="habit-grid" class="habit-grid">
+                        <!-- JS injects grid here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification toast -->
+    <div id="toast" class="toast hidden">Reja saqlandi!</div>
+
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
